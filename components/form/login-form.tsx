@@ -1,20 +1,19 @@
 // @ts-nocheck
 "use client";
-import { FcGoogle } from "react-icons/fc";
-import { useForm } from "react-hook-form";
 import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  FormControl,
   FormErrorMessage,
   FormLabel,
-  FormControl,
   Input,
-  Button,
-  VStack,
-  Box,
   Text,
-  Center,
-  Flex,
-  Divider,
+  VStack,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 import { useFirebaseAuth } from "../../contexts/auth-provider";
 import { auth } from "../../type";
 
@@ -83,7 +82,8 @@ export default function HookForm() {
   );
 }
 function GoogleLogin() {
-  const { googleLogin }: auth = useFirebaseAuth();
+  const { googleLogin, user }: auth = useFirebaseAuth();
+  console.log("first", user);
   return (
     <Center mb={4}>
       <Center
