@@ -1,4 +1,4 @@
-export type auth = {
+type auth = {
   user: User | null;
   googleLogin?: Function;
 };
