@@ -12,12 +12,23 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { useFirebaseAuth } from "../../contexts/auth-provider";
-import { auth } from "../../type";
 
 export default function HookForm() {
+  const { user }: auth = useFirebaseAuth();
+  const { push } = useRouter();
+  useEffect(() => {
+    if (user?.uid) {
+      push("/");
+    }
+
+    return () => {};
+  }, [push, user?.uid]);
+
   const {
     handleSubmit,
     register,
