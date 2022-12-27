@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import {
   FormErrorMessage,
@@ -10,6 +11,8 @@ import {
   VStack,
   Box,
   Text,
+  Center,
+  Flex,
 } from "@chakra-ui/react";
 
 export default function HookForm() {
@@ -29,11 +32,14 @@ export default function HookForm() {
   }
 
   return (
-    <Box w={["96"]}>
-      <Box as='button'>
-        <Text display={"inline"}>Login with Google</Text>
-      </Box>
-      <VStack h={"full"} mt='20' as='form' onSubmit={handleSubmit(onSubmit)}>
+    <Box w={["96"]} mt='20'>
+      <Center>
+        <Flex as='button'>
+          <FcGoogle />
+          <Text display={"inline"}> Login with Google</Text>
+        </Flex>
+      </Center>
+      <VStack h={"full"} as='form' onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={errors.email}>
           <FormLabel htmlFor='email'>Email</FormLabel>
           <Input
