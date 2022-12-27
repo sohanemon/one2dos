@@ -1,5 +1,6 @@
 "use client";
 import { ChakraProvider } from "@chakra-ui/react";
+import AuthProvider from "../contexts/auth-provider";
 import "./globals.css";
 
 export default function RootLayout({
@@ -12,7 +13,9 @@ export default function RootLayout({
       <head />
       <body>
         <ChakraProvider>
-          <main>{children}</main>
+          <AuthProvider>
+            <main>{children}</main>
+          </AuthProvider>
         </ChakraProvider>
       </body>
     </html>
