@@ -30,3 +30,7 @@ type User = {
   apiKey: string;
   appName: string;
 };
+
+type child = {
+  children?: ReactNode;
+};
