@@ -1,4 +1,5 @@
 // @ts-nocheck
+"use client";
 import { useForm } from "react-hook-form";
 import {
   FormErrorMessage,
@@ -7,6 +8,7 @@ import {
   Input,
   Button,
   VStack,
+  Box,
 } from "@chakra-ui/react";
 
 export default function HookForm() {
@@ -26,7 +28,7 @@ export default function HookForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Box w={["96"]} as='form' onSubmit={handleSubmit(onSubmit)}>
       <VStack h={"full"} mt='20'>
         <FormControl isInvalid={errors.email}>
           <FormLabel htmlFor='email'>Email</FormLabel>
@@ -61,6 +63,6 @@ export default function HookForm() {
       <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
         Submit
       </Button>
-    </form>
+    </Box>
   );
 }
