@@ -14,7 +14,7 @@ export default function LeftSide() {
   const { user } = useFirebaseAuth();
   const date = new Date();
   return (
-    <Box p={2} color='gray.5700'>
+    <Box p={2} color='gray.700'>
       <Flex
         alignItems={"center"}
         fontSize={16}
