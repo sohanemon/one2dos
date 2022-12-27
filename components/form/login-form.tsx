@@ -15,6 +15,8 @@ import {
   Flex,
   Divider,
 } from "@chakra-ui/react";
+import { useFirebaseAuth } from "../../contexts/auth-provider";
+import { auth } from "../../type";
 
 export default function HookForm() {
   const {
@@ -81,9 +83,11 @@ export default function HookForm() {
   );
 }
 function GoogleLogin() {
+  const { googleLogin }: auth = useFirebaseAuth();
   return (
     <Center mb={4}>
       <Center
+        onClick={googleLogin}
         gap={1}
         as='button'
         shadow={"sm"}
