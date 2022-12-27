@@ -1,3 +1,4 @@
+"use client";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./globals.css";
 
