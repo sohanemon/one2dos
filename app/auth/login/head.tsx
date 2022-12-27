@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>One2Dos | Login</title>
+      <title>Login - One2Dos</title>
     </>
   );
 }

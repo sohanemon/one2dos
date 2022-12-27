@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Type.d.ts
+
+Create `type.d.ts` and put all type definition there to get awesome typing suggestion without importing or exporting any type
+
+example
+
+```js
+type auth = {
+  user: User | null,
+  googleLogin?: Function,
+};
+```
+
 ## Firebase User Type For Typescript
 
 ```js
