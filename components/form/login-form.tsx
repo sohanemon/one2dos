@@ -9,6 +9,7 @@ import {
   Button,
   VStack,
   Box,
+  Text,
 } from "@chakra-ui/react";
 
 export default function HookForm() {
@@ -28,8 +29,11 @@ export default function HookForm() {
   }
 
   return (
-    <Box w={["96"]} as='form' onSubmit={handleSubmit(onSubmit)}>
-      <VStack h={"full"} mt='20'>
+    <Box w={["96"]}>
+      <Box as='button'>
+        <Text display={"inline"}>Login with Google</Text>
+      </Box>
+      <VStack h={"full"} mt='20' as='form' onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={errors.email}>
           <FormLabel htmlFor='email'>Email</FormLabel>
           <Input
