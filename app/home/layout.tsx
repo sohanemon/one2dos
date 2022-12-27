@@ -1,5 +1,5 @@
 "use client";
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import LeftSide from "./leftSide";
 
 export default function Layout({ children }: child) {
@@ -16,7 +16,7 @@ export default function Layout({ children }: child) {
         mx={"auto"}
       >
         <LeftSide />
-        <Box>{children}</Box>
+        <GridItem colSpan={3}>{children}</GridItem>
       </SimpleGrid>
     </>
   );

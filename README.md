@@ -58,3 +58,27 @@ let x!: number; // Assert that x is defined
 
 console.log(x + x); // No error!
 ```
+
+## Using `as` in Typescript
+
+```js
+<MenuItem
+  onClick={(e) =>
+    setPriority((e.target as HTMLElement).innerText)
+  }
+>
+  Low
+</MenuItem>
+```
+
+Where it is
+
+```js
+
+(e.target as HTMLElement).innerText
+// is equal to
+let x = e.target as HTMLElement
+x.innerText
+```
+
+it asserts the `target` as a `HTMLElement` type

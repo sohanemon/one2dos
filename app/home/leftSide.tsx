@@ -32,7 +32,6 @@ export default function LeftSide() {
             size={"md"}
             bg='pink.400'
             name={user?.displayName}
-            // src={user?.photoURL!}
           />
           <Box>
             <Text fontWeight={"semibold"}>{user?.displayName}</Text>
