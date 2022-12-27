@@ -44,3 +44,17 @@ type User = {
   appName: string,
 };
 ```
+
+## ! in Typescript
+
+`!` is used as non-null assertion and definite assignment assertion
+
+```js
+let s = e!.name;  // Assert that e is non-null and access name
+```
+
+```js
+let x!: number; // Assert that x is defined
+
+console.log(x + x); // No error!
+```
