@@ -1,17 +1,19 @@
 "use client";
 import {
+  Button,
   Center,
   Stack,
   Table,
   TableContainer,
   Tbody,
+  Td,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
-import { completedTodos, readFromFS } from "../../../firebase/firestore";
+import { completedTodos } from "../../../firebase/firestore";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
@@ -31,20 +33,38 @@ export default function Page() {
         textAlign='center'
         w={"full"}
       >
-        My Todos
+        Completed Tasks
       </Center>{" "}
       <TableContainer>
         <Table size='sm'>
           <Thead>
             <Tr>
-              <Th>[]</Th>
               <Th>Day</Th>
               <Th>Name</Th>
               <Th>Note</Th>
-              <Th>Priority</Th>
+              <Th></Th>
             </Tr>
           </Thead>
-          <Tbody></Tbody>
+          <Tbody>
+            {todos?.map((_) => (
+              <Tr key={_.id}>
+                {" "}
+                <Td>{_.date}</Td>
+                <Td>{_.title}</Td>
+                <Td>{_.note}</Td>
+                <Td>
+                  <Button
+                    size={"xs"}
+                    colorScheme='red'
+                    rounded={"full"}
+                    bg='red.300'
+                  >
+                    X
+                  </Button>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
         </Table>
       </TableContainer>
     </Stack>

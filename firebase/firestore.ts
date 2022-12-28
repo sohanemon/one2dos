@@ -9,8 +9,8 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { app } from "./app";
 import { toast } from "react-hot-toast";
+import { app } from "./app";
 
 const db = getFirestore(app);
 
@@ -42,7 +42,7 @@ const readFromFSv1 = async () => {
   });
   return data;
 };
-export const readFromFS = async (uid: string) => {
+export const allTodos = async (uid: string) => {
   const todosRef = collection(db, "todos");
   const q = query(
     todosRef,
