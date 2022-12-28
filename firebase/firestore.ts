@@ -3,7 +3,9 @@ import {
   collection,
   getDocs,
   getFirestore,
+  query,
   Timestamp,
+  where,
 } from "firebase/firestore";
 import { app } from "./app";
 import { toast } from "react-hot-toast";
@@ -29,8 +31,20 @@ export async function addToFS(todoDoc: unknown) {
   }
 }
 
-export const readFromFS = async () => {
+const readFromFSv1 = async () => {
   const querySnapshot = await getDocs(collection(db, "todos"));
+  const data: todo[] = [];
+  querySnapshot.forEach((doc) => {
+    // @ts-ignore
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+};
+export const readFromFS = async (uid: string) => {
+  const todosRef = collection(db, "todos");
+  const q = query(todosRef, where("uid", "==", uid));
+  const querySnapshot = await getDocs(q);
+
   const data: todo[] = [];
   querySnapshot.forEach((doc) => {
     // @ts-ignore

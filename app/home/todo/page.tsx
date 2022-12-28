@@ -2,14 +2,16 @@
 import { Box, Center, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useFirebaseAuth } from "../../../contexts/auth-provider";
 import { readFromFS } from "../../../firebase/firestore";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
+  const { user } = useFirebaseAuth();
   useEffect(() => {
-    readFromFS().then((value) => setTodos(value));
+    if (user?.uid) readFromFS(user?.uid!).then((value) => setTodos(value));
     return () => {};
-  }, []);
+  }, [user?.uid]);
 
   return (
     <Stack>
