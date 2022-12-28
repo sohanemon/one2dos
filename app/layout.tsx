@@ -1,6 +1,7 @@
 "use client";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { Poppins } from "@next/font/google";
+import { Toaster } from "react-hot-toast";
 import AuthProvider from "../contexts/auth-provider";
 import "./globals.css";
 
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body>
         <ChakraProvider>
           <AuthProvider>
+            <Toaster />
             <Box className={poppins.className} as='main'>
               {children}
             </Box>

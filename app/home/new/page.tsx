@@ -20,7 +20,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { add } from "../../../firebase/firestore";
+import { addToFS } from "../../../firebase/firestore";
 import "./datepicker.css";
 
 export default function Page() {
@@ -37,9 +37,9 @@ export default function Page() {
       done: false,
       ...(data as object),
       priority,
-      date: date.toISOString(),
+      date: `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`,
     };
-    console.log(todoDoc);
+    addToFS(todoDoc);
   };
 
   return (
@@ -91,19 +91,19 @@ export default function Page() {
           </FormControl>
         </Flex>
         {/* @ts-ignore */}
-        <FormControl isInvalid={errors.name!}>
-          <FormLabel htmlFor='name'>Name</FormLabel>
+        <FormControl isInvalid={errors.title!}>
+          <FormLabel htmlFor='title'>Title</FormLabel>
           <Input
             variant={"filled"}
-            type={"name"}
-            id='name'
+            type={"title"}
+            id='title'
             placeholder='Hangouts'
-            {...register("name", {
+            {...register("title", {
               required: "This is required",
             })}
           />
           <FormErrorMessage>
-            {errors.name && (errors.name.message as React.ReactNode)}
+            {errors.title && (errors.title.message as React.ReactNode)}
           </FormErrorMessage>
         </FormControl>
         {/* @ts-ignore */}
@@ -122,7 +122,13 @@ export default function Page() {
             {errors.note && (errors.note.message as React.ReactNode)}
           </FormErrorMessage>
         </FormControl>
-        <Button mt={8} w='max' colorScheme='pink' type='submit'>
+        <Button
+          isLoading={isSubmitting}
+          mt={8}
+          w='max'
+          colorScheme='pink'
+          type='submit'
+        >
           Add
         </Button>
       </Stack>

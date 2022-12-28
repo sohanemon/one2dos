@@ -1,16 +1,28 @@
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  Timestamp,
+} from "firebase/firestore";
 import { app } from "./app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { toast } from "react-hot-toast";
 
 const db = getFirestore(app);
 
-export async function add() {
+export async function addToFS(todoDoc: unknown) {
+  console.log(todoDoc);
   try {
-    const docRef = await addDoc(collection(db, "todos"), {
-      first: "Ada",
-      last: "Lovelace",
-      born: 1815,
-    });
-    console.log("Document written with ID: ", docRef.id);
+    toast.promise(
+      addDoc(collection(db, "todos"), {
+        ...(todoDoc as object),
+        timestamp: Timestamp.now(),
+      }),
+      {
+        error: "Failed to add",
+        loading: "Loading",
+        success: "Added successfully",
+      }
+    );
   } catch (e) {
     console.error("Error adding document: ", e);
   }
