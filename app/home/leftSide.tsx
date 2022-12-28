@@ -1,16 +1,11 @@
-import {
-  Avatar,
-  Box,
-  Center,
-  Flex,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Avatar, Box, Flex, Text, VStack } from "@chakra-ui/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { useFirebaseAuth } from "../../contexts/auth-provider";
 
 export default function LeftSide() {
+  const pathname = usePathname();
   const { user } = useFirebaseAuth();
   const date = new Date();
   return (
@@ -42,16 +37,22 @@ export default function LeftSide() {
         </Flex>
       </Flex>
       <VStack alignItems={"start"}>
-        <Text fontWeight={"semibold"} letterSpacing='wider'>
-          New
-        </Text>
-        <Text fontWeight={"semibold"} letterSpacing='wider'>
-          Todo
-        </Text>
-        <Text fontWeight={"semibold"} letterSpacing='wider'>
-          Done
-        </Text>
+        {links.map((_) => (
+          <Link key={_} href={`/home/${_}`}>
+            <Text
+              fontWeight={""}
+              textTransform='capitalize'
+              color={pathname?.includes(_) ? "pink.500" : ""}
+              _hover={{ color: "pink.500" }}
+              letterSpacing='wider'
+            >
+              {_}
+            </Text>
+          </Link>
+        ))}
       </VStack>
     </Box>
   );
 }
+
+const links = ["new", "todo", "done"];

@@ -1,8 +1,10 @@
 "use client";
 import { Box, ChakraProvider } from "@chakra-ui/react";
+import { Poppins } from "@next/font/google";
 import AuthProvider from "../contexts/auth-provider";
 import "./globals.css";
 
+const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +16,9 @@ export default function RootLayout({
       <body>
         <ChakraProvider>
           <AuthProvider>
-            <Box as='main'>{children}</Box>
+            <Box className={poppins.className} as='main'>
+              {children}
+            </Box>
           </AuthProvider>
         </ChakraProvider>
       </body>

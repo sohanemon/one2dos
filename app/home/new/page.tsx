@@ -21,7 +21,6 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import ReactDatePicker from "react-datepicker";
-import { FcAbout } from "react-icons/fc";
 import "./datepicker.css";
 
 export default function Page() {
@@ -86,7 +85,7 @@ export default function Page() {
         </Flex>
         {/* @ts-ignore */}
         <FormControl isInvalid={errors.name!}>
-          <FormLabel htmlFor='name'>name</FormLabel>
+          <FormLabel htmlFor='name'>Name</FormLabel>
           <Input
             variant={"filled"}
             type={"name"}
@@ -101,19 +100,19 @@ export default function Page() {
           </FormErrorMessage>
         </FormControl>
         {/* @ts-ignore */}
-        <FormControl isInvalid={errors.about!}>
-          <FormLabel htmlFor='about'>about</FormLabel>
+        <FormControl isInvalid={errors.note!}>
+          <FormLabel htmlFor='note'>Note</FormLabel>
           <Input
             variant={"filled"}
-            type={"about"}
-            id='about'
+            type={"note"}
+            id='note'
             placeholder='expample@example.com'
-            {...register("about", {
+            {...register("note", {
               required: "This is required",
             })}
           />
           <FormErrorMessage>
-            {errors.about && (errors.about.message as React.ReactNode)}
+            {errors.note && (errors.note.message as React.ReactNode)}
           </FormErrorMessage>
         </FormControl>
       </Stack>
