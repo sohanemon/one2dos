@@ -40,7 +40,7 @@ export default function Page() {
           <Table size='sm'>
             <Thead>
               <Tr>
-                <Th />
+                <Th>Status</Th>
                 <Th>Day</Th>
                 <Th>Name</Th>
                 <Th>Note</Th>

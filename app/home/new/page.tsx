@@ -15,6 +15,7 @@ import {
   MenuList,
   Stack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { forwardRef, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,6 +28,7 @@ import "./datepicker.css";
 export default function Page() {
   const [date, setDate] = useState(new Date());
   const { user } = useFirebaseAuth();
+  const { push } = useRouter();
   const [priority, setPriority] = useState(priorities[1]);
   const {
     handleSubmit,
@@ -42,7 +44,7 @@ export default function Page() {
       date: `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`,
       uid: user?.uid,
     };
-    addToFS(todoDoc);
+    addToFS(todoDoc).then(() => push("/home/todo"));
   };
 
   return (
