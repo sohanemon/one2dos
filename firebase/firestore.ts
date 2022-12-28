@@ -1,10 +1,12 @@
 import {
   addDoc,
   collection,
+  doc,
   getDocs,
   getFirestore,
   query,
   Timestamp,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { app } from "./app";
@@ -42,7 +44,11 @@ const readFromFSv1 = async () => {
 };
 export const readFromFS = async (uid: string) => {
   const todosRef = collection(db, "todos");
-  const q = query(todosRef, where("uid", "==", uid));
+  const q = query(
+    todosRef,
+    where("uid", "==", uid)
+    // where("done", "==", false)
+  );
   const querySnapshot = await getDocs(q);
 
   const data: todo[] = [];
@@ -51,4 +57,24 @@ export const readFromFS = async (uid: string) => {
     data.push({ id: doc.id, ...doc.data() });
   });
   return data;
+};
+
+export const completedTodos = async (uid: string) => {
+  const todosRef = collection(db, "todos");
+  const q = query(todosRef, where("uid", "==", uid), where("done", "==", true));
+  const querySnapshot = await getDocs(q);
+
+  const data: todo[] = [];
+  querySnapshot.forEach((doc) => {
+    // @ts-ignore
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+};
+
+export const updateTodo = async (id: string, done: boolean) => {
+  const docRef = doc(db, "todos", id);
+  await updateDoc(docRef, {
+    done: done,
+  });
 };

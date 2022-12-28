@@ -11,17 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
-import { readFromFS } from "../../../firebase/firestore";
-import TodoTable from "./table";
+import { completedTodos, readFromFS } from "../../../firebase/firestore";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
   const { user } = useFirebaseAuth();
   useEffect(() => {
-    if (user?.uid) readFromFS(user?.uid).then((value) => setTodos(value));
+    if (user?.uid) completedTodos(user?.uid).then((value) => setTodos(value));
     return () => {};
   }, [user?.uid]);
-
+  console.log(todos);
   return (
     <Stack>
       <Center
@@ -38,18 +37,14 @@ export default function Page() {
         <Table size='sm'>
           <Thead>
             <Tr>
-              <Th />
+              <Th>[]</Th>
               <Th>Day</Th>
               <Th>Name</Th>
               <Th>Note</Th>
               <Th>Priority</Th>
             </Tr>
           </Thead>
-          <Tbody>
-            {todos?.map((_) => (
-              <TodoTable key={_.id} todo={_} />
-            ))}
-          </Tbody>
+          <Tbody></Tbody>
         </Table>
       </TableContainer>
     </Stack>

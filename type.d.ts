@@ -47,3 +47,5 @@ type todo = {
   priority: string;
   title: string;
 };
+
+// intrinsic attributes are owned by javascript like id, className, style
