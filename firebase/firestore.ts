@@ -1,6 +1,8 @@
+import { state } from "./../utils/state";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   getFirestore,
@@ -22,11 +24,7 @@ export async function addToFS(todoDoc: unknown) {
         ...(todoDoc as object),
         timestamp: Timestamp.now(),
       }),
-      {
-        error: "Failed to add",
-        loading: "Loading",
-        success: "Added successfully",
-      }
+      state
     );
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -72,9 +70,32 @@ export const completedTodos = async (uid: string) => {
   return data;
 };
 
+export const unCompletedTodos = async (uid: string) => {
+  const todosRef = collection(db, "todos");
+  const q = query(
+    todosRef,
+    where("uid", "==", uid),
+    where("done", "==", false)
+  );
+  const querySnapshot = await getDocs(q);
+
+  const data: todo[] = [];
+  querySnapshot.forEach((doc) => {
+    // @ts-ignore
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+};
+
 export const updateTodo = async (id: string, done: boolean) => {
   const docRef = doc(db, "todos", id);
+
   await updateDoc(docRef, {
     done: done,
   });
+};
+export const deleteTodo = async (id: string) => {
+  toast
+    .promise(deleteDoc(doc(db, "todos", id)), { ...state, success: "Deleted" })
+    .then((_) => console.log(_));
 };

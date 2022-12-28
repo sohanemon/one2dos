@@ -1,28 +1,27 @@
 "use client";
 import {
-  Button,
   Center,
   Stack,
   Table,
   TableContainer,
   Tbody,
-  Td,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
-import { completedTodos, deleteTodo } from "../../../firebase/firestore";
+import { allTodos } from "../../../firebase/firestore";
+import TodoTable from "../todo/table";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
   const { user } = useFirebaseAuth();
   useEffect(() => {
-    if (user?.uid) completedTodos(user?.uid).then((value) => setTodos(value));
+    if (user?.uid) allTodos(user?.uid).then((value) => setTodos(value));
     return () => {};
   }, [user?.uid]);
-  console.log(todos);
+
   return (
     <Stack>
       <Center
@@ -33,37 +32,22 @@ export default function Page() {
         textAlign='center'
         w={"full"}
       >
-        Completed Tasks
+        My Todos
       </Center>{" "}
       <TableContainer>
         <Table size='sm'>
           <Thead>
             <Tr>
+              <Th />
               <Th>Day</Th>
               <Th>Name</Th>
               <Th>Note</Th>
-              <Th>{""}</Th>
+              <Th>Priority</Th>
             </Tr>
           </Thead>
           <Tbody>
             {todos?.map((_) => (
-              <Tr key={_.id}>
-                {" "}
-                <Td>{_.date}</Td>
-                <Td>{_.title}</Td>
-                <Td>{_.note}</Td>
-                <Td>
-                  <Button
-                    onClick={() => deleteTodo(_.id)}
-                    size={"xs"}
-                    colorScheme='red'
-                    rounded={"full"}
-                    bg='red.300'
-                  >
-                    X
-                  </Button>
-                </Td>
-              </Tr>
+              <TodoTable key={_.id} todo={_} />
             ))}
           </Tbody>
         </Table>

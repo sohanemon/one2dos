@@ -11,14 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
-import { allTodos } from "../../../firebase/firestore";
+import { allTodos, unCompletedTodos } from "../../../firebase/firestore";
 import TodoTable from "./table";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
   const { user } = useFirebaseAuth();
   useEffect(() => {
-    if (user?.uid) allTodos(user?.uid).then((value) => setTodos(value));
+    if (user?.uid) unCompletedTodos(user?.uid).then((value) => setTodos(value));
     return () => {};
   }, [user?.uid]);
 

@@ -56,4 +56,4 @@ export default function LeftSide() {
   );
 }
 
-const links = ["new", "todo", "done"];
+const links = ["new", "todo", "done", "all"];
