@@ -20,11 +20,13 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineArrowDropDown } from "react-icons/md";
+import { useFirebaseAuth } from "../../../contexts/auth-provider";
 import { addToFS } from "../../../firebase/firestore";
 import "./datepicker.css";
 
 export default function Page() {
   const [date, setDate] = useState(new Date());
+  const { user } = useFirebaseAuth();
   const [priority, setPriority] = useState(priorities[1]);
   const {
     handleSubmit,
@@ -38,6 +40,7 @@ export default function Page() {
       ...(data as object),
       priority,
       date: `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`,
+      uid: user?.uid,
     };
     addToFS(todoDoc);
   };
@@ -46,6 +49,7 @@ export default function Page() {
     <Box color={"gray.700"}>
       <Center
         fontSize={24}
+        mb='8'
         letterSpacing='wide'
         fontWeight='semibold'
         textAlign='center'

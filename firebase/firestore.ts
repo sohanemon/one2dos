@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  getDocs,
   getFirestore,
   Timestamp,
 } from "firebase/firestore";
@@ -27,3 +28,13 @@ export async function addToFS(todoDoc: unknown) {
     console.error("Error adding document: ", e);
   }
 }
+
+export const readFromFS = async () => {
+  const querySnapshot = await getDocs(collection(db, "todos"));
+  const data: todo[] = [];
+  querySnapshot.forEach((doc) => {
+    // @ts-ignore
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+};

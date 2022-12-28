@@ -34,3 +34,16 @@ type User = {
 type child = {
   children?: ReactNode;
 };
+
+type todo = {
+  id: string;
+  timestamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  date: string;
+  note: string;
+  done: boolean;
+  priority: string;
+  title: string;
+};

@@ -8,7 +8,7 @@ export default function Layout({ children }: child) {
       <SimpleGrid
         rounded={"xl"}
         p='4'
-        mt='10'
+        my='10'
         columns={4}
         maxW='4xl'
         bg={"pink.100"}
