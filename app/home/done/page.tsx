@@ -12,6 +12,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import NotFound from "../../../components/not-found";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
 import { completedTodos, deleteTodo } from "../../../firebase/firestore";
 
@@ -35,39 +36,43 @@ export default function Page() {
       >
         Completed Tasks
       </Center>{" "}
-      <TableContainer>
-        <Table size='sm'>
-          <Thead>
-            <Tr>
-              <Th>Day</Th>
-              <Th>Name</Th>
-              <Th>Note</Th>
-              <Th>{""}</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {todos?.map((_) => (
-              <Tr key={_.id}>
-                {" "}
-                <Td>{_.date}</Td>
-                <Td>{_.title}</Td>
-                <Td>{_.note}</Td>
-                <Td>
-                  <Button
-                    onClick={() => deleteTodo(_.id)}
-                    size={"xs"}
-                    colorScheme='red'
-                    rounded={"full"}
-                    bg='red.300'
-                  >
-                    X
-                  </Button>
-                </Td>
+      {todos?.length ? (
+        <TableContainer>
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th>Day</Th>
+                <Th>Name</Th>
+                <Th>Note</Th>
+                <Th>{""}</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {todos?.map((_) => (
+                <Tr key={_.id}>
+                  {" "}
+                  <Td>{_.date}</Td>
+                  <Td>{_.title}</Td>
+                  <Td>{_.note}</Td>
+                  <Td>
+                    <Button
+                      onClick={() => deleteTodo(_.id)}
+                      size={"xs"}
+                      colorScheme='red'
+                      rounded={"full"}
+                      bg='red.300'
+                    >
+                      X
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NotFound />
+      )}
     </Stack>
   );
 }

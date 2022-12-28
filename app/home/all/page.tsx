@@ -10,6 +10,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import NotFound from "../../../components/not-found";
 import { useFirebaseAuth } from "../../../contexts/auth-provider";
 import { allTodos } from "../../../firebase/firestore";
 import TodoTable from "../todo/table";
@@ -32,26 +33,30 @@ export default function Page() {
         textAlign='center'
         w={"full"}
       >
-        My Todos
+        All Tasks
       </Center>{" "}
-      <TableContainer>
-        <Table size='sm'>
-          <Thead>
-            <Tr>
-              <Th />
-              <Th>Day</Th>
-              <Th>Name</Th>
-              <Th>Note</Th>
-              <Th>Priority</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {todos?.map((_) => (
-              <TodoTable key={_.id} todo={_} />
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      {todos?.length ? (
+        <TableContainer>
+          <Table size='sm'>
+            <Thead>
+              <Tr>
+                <Th />
+                <Th>Day</Th>
+                <Th>Name</Th>
+                <Th>Note</Th>
+                <Th>Priority</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {todos?.map((_) => (
+                <TodoTable key={_.id} todo={_} />
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NotFound />
+      )}
     </Stack>
   );
 }
