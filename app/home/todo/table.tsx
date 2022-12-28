@@ -13,7 +13,11 @@ export default function TodoTable({ todo }: { todo: todo }) {
 
   return (
     <>
-      <Tr cursor={"pointer"} _hover={{ bg: "pink.50" }}>
+      <Tr
+        onClick={() => setIsChecked(!isChecked)}
+        cursor={"pointer"}
+        _hover={{ bg: "pink.50" }}
+      >
         <Td>
           <Checkbox
             size='lg'
