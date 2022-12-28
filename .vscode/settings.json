@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["Chakra", "datepicker"],
+  "cSpell.words": ["Chakra", "datepicker", "todos"],
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }

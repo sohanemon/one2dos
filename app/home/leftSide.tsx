@@ -18,7 +18,8 @@ export default function LeftSide() {
         gap={2}
       >
         <BsFillCalendarCheckFill color='#ed64a6' />
-        {date.getDate()}-{date.getMonth()}-{date.getFullYear()}
+        {date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()}
+        {/* as getMonth starts from 0 as January */}
       </Flex>
       <Flex mb={"5"} alignItems={"center"} ml={"-2"}>
         <Flex gap={2}>

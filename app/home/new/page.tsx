@@ -1,46 +1,47 @@
 "use client";
 
-import { MdOutlineArrowDropDown } from "react-icons/md";
-import "react-datepicker/dist/react-datepicker.css";
-import { useState, forwardRef } from "react";
-import { useForm } from "react-hook-form";
 import {
+  Box,
+  Button,
   Center,
-  Stack,
+  Flex,
+  FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
-  FormErrorMessage,
-  Box,
-  FormControl,
-  Button,
-  HStack,
-  Flex,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Stack,
 } from "@chakra-ui/react";
+import { forwardRef, useState } from "react";
 import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
+import { MdOutlineArrowDropDown } from "react-icons/md";
+import { add } from "../../../firebase/firestore";
 import "./datepicker.css";
 
 export default function Page() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [priority, setPriority] = useState(priorities[1]);
-  console.log(startDate);
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm();
-  // eslint-disable-next-line react/display-name
-  const CalendarDate = forwardRef(
-    // @ts-ignore
-    ({ value, onClick }, ref: ForwardedRef<unknown>) => (
-      <Button id='date' onClick={onClick} ref={ref}>
-        {value}
-      </Button>
-    )
-  );
+
+  const submitHandler = (data: unknown) => {
+    const todoDoc = {
+      done: false,
+      ...(data as object),
+      priority,
+      date: date.toISOString(),
+    };
+    console.log(todoDoc);
+  };
+
   return (
     <Box color={"gray.700"}>
       <Center
@@ -52,13 +53,19 @@ export default function Page() {
       >
         Create New Todo
       </Center>
-      <Stack spacing={3} maxWidth='md' mx={"auto"}>
+      <Stack
+        as={"form"}
+        onSubmit={handleSubmit(submitHandler)}
+        spacing={3}
+        maxWidth='md'
+        mx={"auto"}
+      >
         <Flex justify={"space-between"}>
           <FormControl>
             <FormLabel htmlFor='date'>Select Date</FormLabel>
             <ReactDatePicker
-              selected={startDate}
-              onChange={(date: Date | null) => setStartDate(date!)}
+              selected={date}
+              onChange={(date: Date | null) => setDate(date!)}
               customInput={<CalendarDate />}
             />
           </FormControl>
@@ -90,7 +97,7 @@ export default function Page() {
             variant={"filled"}
             type={"name"}
             id='name'
-            placeholder='expample@example.com'
+            placeholder='Hangouts'
             {...register("name", {
               required: "This is required",
             })}
@@ -106,7 +113,7 @@ export default function Page() {
             variant={"filled"}
             type={"note"}
             id='note'
-            placeholder='expample@example.com'
+            placeholder='With ...'
             {...register("note", {
               required: "This is required",
             })}
@@ -115,9 +122,22 @@ export default function Page() {
             {errors.note && (errors.note.message as React.ReactNode)}
           </FormErrorMessage>
         </FormControl>
+        <Button mt={8} w='max' colorScheme='pink' type='submit'>
+          Add
+        </Button>
       </Stack>
     </Box>
   );
 }
 
 const priorities = ["very high", "high", "medium", "low"];
+
+// eslint-disable-next-line react/display-name
+const CalendarDate = forwardRef(
+  // @ts-ignore
+  ({ value, onClick }, ref: ForwardedRef<unknown>) => (
+    <Button id='date' onClick={onClick} ref={ref}>
+      {value}
+    </Button>
+  )
+);
