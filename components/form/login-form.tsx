@@ -80,7 +80,7 @@ export default function HookForm() {
         </VStack>
         <Button
           mt={4}
-          colorScheme='teal'
+          colorScheme='pink'
           isLoading={isSubmitting}
           type='submit'
         >
