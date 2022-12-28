@@ -24,13 +24,12 @@ export default function TodoTable({ todo }: { todo: todo }) {
             colorScheme='pink'
             bg={"blackAlpha.300"}
             isChecked={isChecked}
-            onChange={() => setIsChecked(!isChecked)}
           ></Checkbox>
         </Td>
         <Td>{todo.date}</Td>
         <Td>{todo.title}</Td>
         <Td>{todo.note}</Td>
-        <Td>{todo.priority}</Td>
+        <Td textTransform={"capitalize"}>{todo.priority}</Td>
       </Tr>
     </>
   );
