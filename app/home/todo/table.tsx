@@ -4,7 +4,7 @@ import { Checkbox, Td, Th, Tr } from "@chakra-ui/react";
 import { updateTodo } from "../../../firebase/firestore";
 
 export default function TodoTable({ todo }: { todo: todo }) {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(todo.done);
   useEffect(() => {
     updateTodo(todo.id, isChecked);
 
@@ -19,7 +19,7 @@ export default function TodoTable({ todo }: { todo: todo }) {
             size='lg'
             colorScheme='pink'
             bg={"blackAlpha.300"}
-            isChecked={isChecked && todo.done}
+            isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
           ></Checkbox>
         </Td>
