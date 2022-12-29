@@ -101,9 +101,10 @@ function GoogleLogin() {
       <Center
         onClick={googleLogin}
         gap={1}
+        border={"1px solid pink"}
         as='button'
         shadow={"sm"}
-        _hover={{ shadow: "md" }}
+        _hover={{ shadow: "md", border: "2px solid pink" }}
         px='7'
         py={1}
         rounded='full'
