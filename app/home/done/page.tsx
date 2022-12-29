@@ -51,7 +51,7 @@ export default function Page() {
                 <Th>{""}</Th>
               </Tr>
             </Thead>
-            <Tbody key={todos.length}>
+            <Tbody>
               {todos?.map((_) => (
                 <Tr key={_.id}>
                   {" "}

@@ -9,14 +9,16 @@ export default function Layout({ children }: child) {
         rounded={"xl"}
         p='4'
         my='10'
-        columns={4}
+        columns={7}
         maxW='4xl'
         bg={"pink.100"}
         shadow='xl'
         mx={"auto"}
       >
-        <LeftSide />
-        <GridItem colSpan={3}>{children}</GridItem>
+        <GridItem colSpan={2}>
+          <LeftSide />
+        </GridItem>
+        <GridItem colSpan={5}>{children}</GridItem>
       </SimpleGrid>
     </>
   );
