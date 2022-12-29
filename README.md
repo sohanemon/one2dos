@@ -82,3 +82,14 @@ x.innerText
 ```
 
 it asserts the `target` as a `HTMLElement` type
+
+## Awesome refetching way! No SWR, React Query
+
+```js
+const [seed, setSeed] = useState(1);
+const reset = () => {
+  setSeed(Math.random());
+}
+<Component key={seed}/>
+<Button onClick={reset}>Reset</Button>
+```

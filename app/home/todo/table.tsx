@@ -3,13 +3,19 @@ import { useState, useEffect } from "react";
 import { Checkbox, Td, Th, Tr } from "@chakra-ui/react";
 import { updateTodo } from "../../../firebase/firestore";
 
-export default function TodoTable({ todo }: { todo: todo }) {
+export default function TodoTable({
+  todo,
+  setRefetch,
+}: {
+  todo: todo;
+  setRefetch: Function;
+}) {
   const [isChecked, setIsChecked] = useState(todo.done);
   useEffect(() => {
     updateTodo(todo.id, isChecked);
-
+    setRefetch((p: number) => p + 1);
     return () => {};
-  }, [isChecked, todo.id]);
+  }, [isChecked, setRefetch, todo.id]);
 
   return (
     <>

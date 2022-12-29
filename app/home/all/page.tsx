@@ -17,11 +17,12 @@ import TodoTable from "../todo/table";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
+  const [refetch, setRefetch] = useState(0);
   const { user } = useFirebaseAuth();
   useEffect(() => {
     if (user?.uid) allTodos(user?.uid).then((value) => setTodos(value));
     return () => {};
-  }, [user?.uid]);
+  }, [user?.uid, refetch]);
 
   return (
     <Stack>
@@ -47,9 +48,9 @@ export default function Page() {
                 <Th>Priority</Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody key={todos.length}>
               {todos?.map((_) => (
-                <TodoTable key={_.id} todo={_} />
+                <TodoTable setRefetch={setRefetch} key={_.id} todo={_} />
               ))}
             </Tbody>
           </Table>
