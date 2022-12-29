@@ -2,6 +2,7 @@
 import { Button, Center } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Loader from "../components/loader";
 import { useFirebaseAuth } from "../contexts/auth-provider";
 
 export default function Home() {
@@ -15,7 +16,9 @@ export default function Home() {
 
   return (
     <main>
-      <Center mt='30'>Loading...</Center>
+      <Center mt='30'>
+        <Loader />
+      </Center>
     </main>
   );
 }
