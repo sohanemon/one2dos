@@ -17,7 +17,6 @@ import { app } from "./app";
 const db = getFirestore(app);
 
 export async function addToFS(todoDoc: unknown) {
-  console.log(todoDoc);
   try {
     toast.promise(
       addDoc(collection(db, "todos"), {
