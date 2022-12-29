@@ -18,16 +18,14 @@ import { completedTodos, deleteTodo } from "../../../firebase/firestore";
 
 export default function Page() {
   const [todos, setTodos] = useState<todo[]>();
-  const [refetch, setRefetch] = useState(0);
   const { user } = useFirebaseAuth();
   useEffect(() => {
     if (user?.uid) completedTodos(user?.uid).then((value) => setTodos(value));
     return () => {};
-  }, [user?.uid, refetch]);
+  }, [user?.uid]);
   // refetch is to update the component
   const handleDelete = (id: string) => {
     deleteTodo(id);
-    setRefetch((p) => p + 1);
   };
 
   return (
