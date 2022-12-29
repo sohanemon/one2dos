@@ -81,6 +81,7 @@ export default function HookForm() {
         <Button
           mt={4}
           colorScheme='pink'
+          bg='pink.400'
           isLoading={isSubmitting}
           type='submit'
         >
