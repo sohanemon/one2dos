@@ -5,8 +5,11 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { app } from "../firebase/app";
+import { toast } from "react-hot-toast";
+import { state } from "../utils/state";
 
 const auth = getAuth(app);
 const FirebaseAuth = createContext<auth>({ user: null });
@@ -38,10 +41,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         console.log(error);
       });
   };
+  const logOut = () => {
+    toast
+      .promise(signOut(auth), { ...state, success: "Logged Out Successfully" })
+
+      .then((_) => console.log(_))
+      .catch((_) => console.log(_));
+  };
 
   const value = 10;
   return (
-    <FirebaseAuth.Provider value={{ user, googleLogin }}>
+    <FirebaseAuth.Provider value={{ user, googleLogin, logOut }}>
       {children}
     </FirebaseAuth.Provider>
   );

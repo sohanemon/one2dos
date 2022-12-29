@@ -1,6 +1,7 @@
 type auth = {
   user: User | null;
   googleLogin?: Function;
+  logOut?: Function;
 };
 
 type User = {

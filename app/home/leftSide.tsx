@@ -1,14 +1,20 @@
 import { Avatar, Box, Flex, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useFirebaseAuth } from "../../contexts/auth-provider";
 
 export default function LeftSide() {
   const pathname = usePathname();
-  const { user } = useFirebaseAuth();
+  const { user, logOut } = useFirebaseAuth();
+  const { push } = useRouter();
   const date = new Date();
+  const handleLogOut = () => {
+    logOut?.();
+    push("/auth/login");
+  };
+
   return (
     <Box p={2} color='gray.700'>
       <Flex justifyContent='space-between'>
@@ -24,7 +30,7 @@ export default function LeftSide() {
           {/* as getMonth starts from 0 as January */}
         </Flex>
 
-        <Box title='Log Out Session' cursor={"pointer"}>
+        <Box onClick={handleLogOut} title='Log Out Session' cursor={"pointer"}>
           <RiLogoutCircleRLine fontSize={20} color='#ee4697' />
         </Box>
       </Flex>
