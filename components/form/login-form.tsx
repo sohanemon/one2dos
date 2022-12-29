@@ -95,7 +95,6 @@ export default function HookForm() {
 }
 function GoogleLogin() {
   const { googleLogin, user }: auth = useFirebaseAuth();
-  console.log("first", user);
   return (
     <Center mb={4}>
       <Center

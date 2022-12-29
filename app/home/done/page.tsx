@@ -30,7 +30,6 @@ export default function Page() {
     setRefetch((p) => p + 1);
   };
 
-  console.log(todos);
   return (
     <Stack>
       <Center
